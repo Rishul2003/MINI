@@ -28,34 +28,69 @@ def sanitization(web):
         token.remove('com')
     return token
 
-urls = []
-urls.append(input("Input the URL that you want to check (eg. google.com) : "))
-#print (urls)
+def predict(url):
+    urls = []
+    urls.append(url)
+    # urls.append(input("Input the URL that you want to check (eg. google.com) : "))
+    #print (urls)
 
-# Using whitelist filter as the model fails in many legit cases since the biggest problem is not finding the malicious urls but to segregate the good ones
-whitelist = ['hackthebox.eu','root-me.org','gmail.com']
-s_url = [i for i in urls if i not in whitelist]
+    # Using whitelist filter as the model fails in many legit cases since the biggest problem is not finding the malicious urls but to segregate the good ones
+    whitelist = ['hackthebox.eu','root-me.org','gmail.com']
+    s_url = [i for i in urls if i not in whitelist]
 
-#Loading the model
-file = "Classifier/pickel_model.pkl"
-with open(file, 'rb') as f1:  
-    lgr = pickle.load(f1)
-f1.close()
-file = "Classifier/pickel_vector.pkl"
-with open(file, 'rb') as f2:  
-    vectorizer = pickle.load(f2)
-f2.close()
-
-
-x = vectorizer.transform(s_url)
-y_predict = lgr.predict(x)
-
-for site in whitelist:
-    s_url.append(site)
+    #Loading the model
+    file = "Classifier/pickel_model.pkl"
+    with open(file, 'rb') as f1:  
+        lgr = pickle.load(f1)
+    f1.close()
+    file = "Classifier/pickel_vector.pkl"
+    with open(file, 'rb') as f2:  
+        vectorizer = pickle.load(f2)
+    f2.close()
 
 
-predict = list(y_predict)
-for j in range(0,len(whitelist)):
-    predict.append('good')
-print("\nThe entered domain is: ", predict[0],"\n")
+    x = vectorizer.transform(s_url)
+    y_predict = lgr.predict(x)
+
+    for site in whitelist:
+        s_url.append(site)
+
+
+    predict = list(y_predict)
+    for j in range(0,len(whitelist)):
+        predict.append('good')
+    return predict[0]
+    # print("\nThe entered domain is: ", predict[0],"\n")
+
+if __name__ == '__main__':
+    urls = []
+    urls.append(input("Input the URL that you want to check (eg. google.com) : "))
+    #print (urls)
+
+    # Using whitelist filter as the model fails in many legit cases since the biggest problem is not finding the malicious urls but to segregate the good ones
+    whitelist = ['hackthebox.eu','root-me.org','gmail.com']
+    s_url = [i for i in urls if i not in whitelist]
+
+    #Loading the model
+    file = "Classifier/pickel_model.pkl"
+    with open(file, 'rb') as f1:  
+        lgr = pickle.load(f1)
+    f1.close()
+    file = "Classifier/pickel_vector.pkl"
+    with open(file, 'rb') as f2:  
+        vectorizer = pickle.load(f2)
+    f2.close()
+
+
+    x = vectorizer.transform(s_url)
+    y_predict = lgr.predict(x)
+
+    for site in whitelist:
+        s_url.append(site)
+
+
+    predict = list(y_predict)
+    for j in range(0,len(whitelist)):
+        predict.append('good')
+    print("\nThe entered domain is: ", predict[0],"\n")
 
