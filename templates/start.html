@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Upload File</title>
-</head>
-<body>
-    <h2>Upload File</h2>
-    <form action="/predict" method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
+    <link rel="stylesheet" href="stylesheet.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Upload File</h2>
+      <form
+        id="upload-form"
+        action="/predict"
+        method="post"
+        enctype="multipart/form-data">
+        <label for="file-upload" class="custom-file-upload">
+          <input id="file-upload" type="file" name="file" />Choose File
+        </label>
+        <div id="file-error-msg" class="error-message"></div>
+        <div
+          id="response-message"
+          class="response-message"
+          style="display: none"></div>
+
         <button type="submit">Upload File</button>
-    </form>
-    <h2>Submit URL</h2>
-    <form action="/url" method="post">
+      </form>
+
+      <h2>Submit URL</h2>
+      <form action="/url" method="post">
         <label for="text_content">URL:</label>
-        <input type="text" id="text_content" name="text_content" required>
-        <br><br>
-        <input type="submit" value="Submit">
-    </form>
-    
-</body>
+        <input
+          type="text"
+          id="text_content"
+          name="text_content"
+          style="width: 70%" />
+        <br /><br />
+        <input type="submit" value="Submit" />
+      </form>
+      <div
+        id="response-message"
+        class="response-message"
+        style="display: none"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
