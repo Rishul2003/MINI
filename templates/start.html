@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Upload File</title>
-    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
   </head>
   <body>
     <div class="container">
@@ -18,30 +18,20 @@
           <input id="file-upload" type="file" name="file" />Choose File
         </label>
         <div id="file-error-msg" class="error-message"></div>
-        <div
-          id="response-message"
-          class="response-message"
-          style="display: none"></div>
-
+        <div id="response-message-file" class="response-message" ></div>
         <button type="submit">Upload File</button>
       </form>
-
       <h2>Submit URL</h2>
-      <form action="/url" method="post">
+      <form id="url-form" action="/url" method="post">
         <label for="text_content">URL:</label>
-        <input
-          type="text"
-          id="text_content"
-          name="text_content"
-          style="width: 70%" />
-        <br /><br />
-        <input type="submit" value="Submit" />
-      </form>
-      <div
-        id="response-message"
-        class="response-message"
-        style="display: none"></div>
-    </div>
-    <script src="script.js"></script>
+        <input type="text" id="text_content" name="text_content" style="width: 70%" />
+
+        <button type="submit">SUBMIT</button>
+        <div
+          id="response-message-url"
+          class="response-message"
+          ></div>
+    </form>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
 </html>

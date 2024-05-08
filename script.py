@@ -6,6 +6,7 @@ import pickle
 import numpy as np
 from Extract import PE_main
 from Extract import url_main
+from tempfile import mkstemp
 app = Flask(__name__)
 
 def sanitization(web):
@@ -40,25 +41,20 @@ def hello_world():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Check if the request contains a file
-    
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'})
-
     file = request.files['file']
 
     # Check if the file is an executable
     if file.filename.endswith('.exe'):
-        # Save the file
-        file_path = 'uploaded_file.exe'
-        # Check if the file already exists
-        if os.path.exists(file_path):
-            os.remove(file_path) 
-        file.save(file_path)
+        _, temp_file_path = mkstemp(suffix='.exe')
+        file.save(temp_file_path)
         try:
-            result = run_PE(file_path)
+            result = run_PE(temp_file_path)
+            # os.remove(file_path)
             return jsonify({'result': result})
         except Exception as e:
+            # os.remove(file_path)
             return jsonify({'error': f'Execution failed: {e}'})
     else:
         return jsonify({'error': 'File is not an executable'})

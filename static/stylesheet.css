@@ -65,3 +65,10 @@ input[type="submit"]:hover {
   margin-top: 5px;
   display: none;
 }
+.response-message {
+  display: none;
+  background-color: lightblue;
+  padding: 10px;
+  margin-top: 10px;
+}
+

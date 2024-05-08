@@ -175,7 +175,9 @@ def extract_infos(fpath):
     return res
 
 def predict_file(file_path):
-    full_file_path = r"C:\Users\91701\Desktop\mini_project\Malware-Detection-using-Machine-learning\uploaded_file.exe"
+    directory_path = r"C:\Users\91701\Desktop\mini_project\Malware-Detection-using-Machine-learning"
+    # file_path = "uploaded_file.exe"
+    full_file_path = os.path.join(directory_path, file_path)
     clf = joblib.load('Classifier/classifier.pkl')
     features = pickle.loads(open(os.path.join('Classifier/features.pkl'), 'rb').read())
     data = extract_infos(full_file_path)
