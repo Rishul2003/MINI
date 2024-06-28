@@ -30,4 +30,5 @@ For URL detection, Logistic Regression was used, achieving an accuracy of **98.7
 Our results were compared with the findings from the research paper "[Efficient malware detection in PE files using machine learning](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9117547)" published in IEEE. The comparison shows that our approach provides competitive accuracy rates, demonstrating the effectiveness of the selected machine learning models.
 
 #User Interface
-file:///home/rishul/Pictures/Screenshots/Screenshot%20from%202024-06-29%2003-35-01.png
+![Screenshot from 2024-06-29 03-35-01](https://github.com/Rishul2003/MINI/assets/98285520/396f4b17-8ab5-4497-b2c4-3da451284a6e)
+
